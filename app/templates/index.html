@@ -3,59 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Table</title>
+    <title>Water POS Data</title>
     <style>
         table {
-            width: 100%;
             border-collapse: collapse;
+            width: 100%;
         }
-
         th, td {
-            padding: 8px;
+            border: 1px solid #dddddd;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            padding: 8px;
         }
-
         th {
             background-color: #f2f2f2;
         }
     </style>
 </head>
 <body>
-    <h1>Data Table</h1>
-
-    {% for group, data in group_data.items() %}
+    <h1> {{ company }}</h1>
+    {% for group, attributes in table_data.items() %}
         <h2>{{ group }}</h2>
         <table>
-            <thead>
+            <tr>
+                <th>Attribute</th>
+                <th>Value</th>
+            </tr>
+            {% for attribute, value in attributes.items() %}
                 <tr>
-                    <th>Key</th>
-                    <th>Value</th>
+                    <td>{{ attribute }}</td>
+                    <td>{{ value }}</td>
                 </tr>
-            </thead>
-            <tbody>
-                {% for key, value in data.items() %}
-                    <tr>
-                        <td>{{ key }}</td>
-                        <td>{{ value }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
+            {% endfor %}
         </table>
     {% endfor %}
 </body>
 </html>
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Response Page</title>
-</head>
-<body>
-    <h1>Response Page</h1>
-    <p>Message: {{ message }}</p>
-    <p>Data: {{ data }}</p>
-</body>
-</html> -->

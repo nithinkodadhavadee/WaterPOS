@@ -1,14 +1,30 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, render_template
 import requests
 
 app = Flask(__name__, template_folder='./app/templates')
 
 @app.route('/', methods=['GET'])
-def post_request():
-    EXTERNAL_API_URL = "https://www.appsheet.com/api/v2/apps/1d97fa54-f86b-48cf-a81f-cc5edb15b62d/tables/" + "Automobile" + "/Action?applicationAccessKey=V2-FMmuN-5Ldnj-qzcie-6AmdR-wtMP7-bt8Mw-HdTgA-4GR3y"
+def getData():
+    # Get the query parameters
+    company = request.args.get('company')
+    companyType = request.args.get('type')
+
+    # Perform some logic based on the parameters
+    if company is None or companyType is None:
+        return render_template('error.html', message='Both company and type parameters are required.'), 400
+
+    # Placeholder for data retrieval logic based on company and type
+    # You can replace this with your actual data retrieval code
+    data = {
+        'company': company,
+        'type': companyType,
+        'info': 'Placeholder data for company {} of type {}'.format(company, companyType)
+    }
+
+    appsheetApi = "https://www.appsheet.com/api/v2/apps/1d97fa54-f86b-48cf-a81f-cc5edb15b62d/tables/" + companyType + "/Action?applicationAccessKey=V2-FMmuN-5Ldnj-qzcie-6AmdR-wtMP7-bt8Mw-HdTgA-4GR3y"
     
     # Request body data
-    request_body_data = {
+    requestBodyData = {
         "Action": "Find",
         "Properties": {
             "Locale": "en-IN"
@@ -17,74 +33,100 @@ def post_request():
     }
     
     # Make a POST request to the external API
-    response = requests.post(EXTERNAL_API_URL, json=request_body_data)
+    response = requests.post(appsheetApi, json=requestBodyData)
+    print(response)
+    try:
+        json_data = response.json()
+    except:
+        return render_template('error.html', message='No data available for the specified company.'), 404
+
+    # Extracting data for the specified company
+    company_data = {}
+    for row in json_data:
+        if row.get('Company') == company:
+            company_data = row
+            break
     
-    # Check if the request was successful
-    if response.status_code == 200:
-        # Get response data from the external API
-        api_response_data = response.json()
-        
-        # Initialize dictionaries to store data for each group
-        group_data = {
-            'Group A': {},
-            'Group B': {},
-            'Group C': {},
-            'Group D': {},
-            'Group E': {}
-        }
-        
-        # Define the keys you want to extract for each group
-        keys_to_extract = {
-            'Group A': [
-                'Quantity of Raw water drawn (Bulk water supplied) from BWSSB main (in KLD)',
-                'Quantity of Raw water drawn from the Bore well (Groundwater) (in KLD)',
-                'Quantity of Bottled water supplied from the vendor for potable/ drinking purpose (in KLD)',
-                'Quantity of Raw water supplied from the Tankers/ Vendor for domestic/ non domestic purpose (in KLD)'
-            ],
-            'Group B': [
-                'Freshwater supplied to Industrial processes (combined or in parts, if avialable',
-                'Freshwater supplied to canteen',
-                'Freshwater supplied to RO',
-                'Freshwater supplied for domestic use(it includes building wise restroom and other uses)',
-                'Freshwater supplied to cooling towers (no values should overlap)',
-                'Freshwater supplied for any other usage (like floor cleaning, gardening, vehicle washing, construction purpose etc.)'
-            ],
-            'Group C': [
-                'Volume of Waste water generated from all places like Canteen, restrooms building wise, industrial processes, Ro reject, Water treatment plant, etc (in KLD)'
-            ],
-            'Group D': [
-                'Quantity of Treated Waste water utilized in KLD Gardening/ Lawn',
-                'Quantity of Treated Waste water utilized in KLD; Toilet Flush:',
-                'Quantity of Treated Waste water utilized in KLD; Cooling purpose:',
-                'Quantity of Treated Waste water utilized in KLD; Rough wash purpose:',
-                'Quantity of Treated Waste water utilized in KLD; Floor cleaning:',
-                'Quantity of Treated Waste water utilized in KLD; Construction purpose',
-                'Quantity of Treated Waste water utilized in KLD; Green Belt development',
-                'Quantity of Treated Waste water utilized in KLD; Any other Usage:'
-            ],
-            'Group E': [
-                'Treated waste water discharge to outside the campus boundries'
-            ]
-        }
-        
-        # Iterate over each item in the API response
-        for row in api_response_data:
-            # Iterate over each group
-            for group, keys in keys_to_extract.items():
-                # Initialize dictionary for the group if not present
-                if group not in group_data:
-                    group_data[group] = {}
-                # Extract keys for the current group
-                for key in keys:
-                    if key in row:
-                        # Add key-value pair to the corresponding group dictionary
-                        group_data[group][key] = row[key]
-        
-        # Render the response HTML template with the data
-        print(api_response_data)
-        return render_template('index.html', group_data=group_data)
-    else:
-        print("Error: Failed to fetch data from external API")
+    if not company_data:
+        return render_template('error.html', message='No data available for the specified company.'), 404
+    
+    # Dictionary to map each attribute to its group
+    attribute_groups = {
+        "Quantity of Raw water drawn (Bulk water supplied) from BWSSB main (in KLD)": "Group A",
+        "Quantity of Raw water drawn from the Bore well (Groundwater) (in KLD)": "Group A",
+        "Quantity of Bottled water supplied from the vendor for potable/ drinking purpose (in KLD)": "Group A",
+        "Quantity of Raw water supplied from the Tankers/ Vendor for domestic/ non domestic purpose (in KLD)": "Group A",
+        "Freshwater supplied to Industrial processes": "Group B",
+        "Freshwater supplied to canteen": "Group B",
+        "Freshwater supplied to RO": "Group B",
+        "Freshwater supplied for domestic use(it includes building wise restroom and other uses)": "Group B",
+        "Freshwater supplied to cooling towers (no values should overlap)": "Group B",
+        "Freshwater supplied for any other usage (like floor cleaning, gardening, vehicle washing, construction purpose etc.)": "Group B",
+        "Volume of Waste water generated from all places like Canteen, restrooms building wise, industrial processes, Ro reject, Water treatment plant, etc (in KLD)": "Group C",
+        "Quantity of Treated Waste water utilized in KLD Gardening/ Lawn": "Group D",
+        "Quantity of Treated Waste water utilized in KLD;  Toilet Flush:": "Group D",
+        "Quantity of Treated Waste water utilized in KLD; Cooling purpose:": "Group D",
+        "Quantity of Treated Waste water utilized in KLD; Rough wash purpose:": "Group D",
+        "Quantity of Treated Waste water utilized in KLD; Floor cleaning:": "Group D",
+        "Quantity of Treated Waste water utilized in KLD; Construction purpose": "Group D",
+        "Quantity of Treated Waste water utilized in KLD; Green Belt development": "Group D",
+        "Quantity of Treated Waste water utilized in KLD; Any other Usage:": "Group D",
+        "Treated waste water discharge to outside the campus boundries": "Group E"
+    }
+
+    # Extracting relevant data attributes for the table along with their groups
+    table_data = {}
+    for key, value in company_data.items():
+        if key in attribute_groups:
+            group = attribute_groups[key]
+            if value and value != "0" and value != "null":
+                if group not in table_data:
+                    table_data[group] = {}
+                table_data[group][key] = value
+    
+    return render_template('index.html', company=company, table_data=table_data)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
+
+# from flask import Flask, request, jsonify, render_template
+# import requests
+
+# app = Flask(__name__, template_folder='./app/templates')
+
+# @app.route('/', methods=['GET'])
+# def getData():
+#     # Get the query parameters
+#     company = request.args.get('company')
+#     companyType = request.args.get('type')
+
+#     # Perform some logic based on the parameters
+#     if company is None or companyType is None:
+#         return jsonify({'error': 'Both company and type parameters are required.'}), 400
+
+#     # Placeholder for data retrieval logic based on company and type
+#     # You can replace this with your actual data retrieval code
+#     data = {
+#         'company': company,
+#         'type': companyType,
+#         'info': 'Placeholder data for company {} of type {}'.format(company, companyType)
+#     }
+
+#     appsheetApi = "https://www.appsheet.com/api/v2/apps/1d97fa54-f86b-48cf-a81f-cc5edb15b62d/tables/" + companyType + "/Action?applicationAccessKey=V2-FMmuN-5Ldnj-qzcie-6AmdR-wtMP7-bt8Mw-HdTgA-4GR3y"
+    
+#     # Request body data
+#     requestBodyData = {
+#         "Action": "Find",
+#         "Properties": {
+#             "Locale": "en-IN"
+#         },
+#         "Rows": []
+#     }
+    
+#     # Make a POST request to the external API
+#     response = requests.post(appsheetApi, json=requestBodyData)
+#     return response.json(), 200
+#     # return jsonify(data), 200
+
+# if __name__ == '__main__':
+#     app.run(host='0.0.0.0', port=5000, debug=True)
