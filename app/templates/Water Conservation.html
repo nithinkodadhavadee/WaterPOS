@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Land Use Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+        }
+        div {
+            border: 1px solid black;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        h1, h2, h3 {
+            margin-top: 0;
+        }
+        label {
+            font-weight: bold;
+        }
+        select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div>
+        <h1>Rain Water Harvesting</h1>
+
+        <h2>Rainfall Pattern at the location</h2>
+        <table>
+            <thead>
+                <tr>
+                    <td rowspan="2">Sl No</td>
+                    <td rowspan="2">Rain Gauge Stations</td>
+                    <td rowspan="2">Normal Rainfall (mm)</td>
+                    <td colspan="9">Actual Annual Rainfall</td>
+                </tr>
+                <tr>
+                    <td>2016</td>
+                    <td>2017</td>
+                    <td>2018</td>
+                    <td>2019</td>
+                    <td>2020</td>
+                    <td>2021</td>
+                    <td>2022</td>
+                    <td>2023</td>
+                    <td>2024</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Bangalore South</td>
+                    <td>15</td>
+                    <td>890</td>
+                    <td>794</td>
+                    <td>1359</td>
+                    <td>852</td>
+                    <td>899</td>
+                    <td>1169</td>
+                    <td>1208</td>
+                    <td>1128</td>
+                    <td>2023</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Rooftop Rainwater Potential</h2>
+        <h3>Proposed Scenario</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Land Use type</th>
+                    <th>Area</th>
+                    <th>Runoff</th>
+                    <th>Annual Rainfall</th>
+                    <th>Available Rooftop Runoff for Collection</th>
+                    <th>Available Rainwater for Usage</th>
+                    <th>Proposed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>B3</td>
+                    <td>2687</td>
+                    <td>0.8</td>
+                    <td>0.89</td>
+                    <td>1913</td>
+                    <td>66</td>
+                    <td>TRUE</td>
+                </tr>
+                <tr>
+                    <td>B4</td>
+                    <td>7221</td>
+                    <td>0.8</td>
+                    <td>0.89</td>
+                    <td>5134</td>
+                    <td>66</td>
+                    <td>TRUE</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h3>Existing Scenario</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Land Use type</th>
+                    <th>Area</th>
+                    <th>Runoff</th>
+                    <th>Annual Rainfall</th>
+                    <th>Available Rooftop Runoff for Collection</th>
+                    <th>Available Rainwater for Usage</th>
+                    <th>Proposed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>A1</td>
+                    <td>7706</td>
+                    <td>0.8</td>
+                    <td>0.89</td>
+                    <td>5487</td>
+                    <td>66</td>
+                    <td>FALSE</td>
+                </tr>
+                <tr>
+                    <td>B1</td>
+                    <td>7446</td>
+                    <td>0.8</td>
+                    <td>0.89</td>
+                    <td>5301</td>
+                    <td>66</td>
+                    <td>FALSE</td>
+                </tr>
+                <tr>
+                    <td>B2</td>
+                    <td>2405</td>
+                    <td>0.8</td>
+                    <td>0.89</td>
+                    <td>1712</td>
+                    <td>66</td>
+                    <td>FALSE</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h2>Rainwater Potential from open spaces</h2>
+        <h3>Area of Runoff Available</h3>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td>A (In Sq. M)</td>
+                    <td>B (In Sq. M)</td>
+                    <td>C (In Sq. M)</td>
+                    <td>D (In Sq. M)</td>
+                </tr>
+                <tr>
+                    <td>Total Area of the Plant</td>
+                    <td>Area used for Garden and Green Cover</td>
+                    <td>Area Covered by Various Block</td>
+                    <td>Approximate Area available as Open Space</td>
+                </tr>
+                <tr>
+                    <td>78792</td>
+                    <td>27600</td>
+                    <td>27455</td>
+                    <td>(A-B-C) = 23737</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Rainwater Potential from open spaces</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Land Use type</th>
+                    <th>Area</th>
+                    <th>Runoff</th>
+                    <th>Annual Rainfall</th>
+                    <th>Available Rooftop Runoff for Collection</th>
+                    <th>Available Rainwater for Usage</th>
+                    <th>Proposed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Open Spaces including pavements, approach roads & landscapes</td>
+                    <td>23737</td>
+                    <td>0.35</td>
+                    <td>0.890</td>
+                    <td>73794</td>
+                    <td>73794 M<sup>3</sup> / 365 Days</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <label for="remarks">Insights:</label><br>
+        <textarea id="remarks" name="remarks" rows="4" cols="50"></textarea>
+    </div>
+
+    <div>
+        <h1>Groundwater Recharge</h1>
+
+        <h2>Runoff water available from open sources</h2>
+        <h3>Area of Runoff Available</h3>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td>A (In Sq. M)</td>
+                    <td>B (In Sq. M)</td>
+                    <td>C (In Sq. M)</td>
+                    <td>D (In Sq. M)</td>
+                </tr>
+                <tr>
+                    <td>Total Area of the Plant</td>
+                    <td>Area used for Garden and Green Cover</td>
+                    <td>Area Covered by Various Block</td>
+                    <td>Approximate Area available as Open Space</td>
+                </tr>
+                <tr>
+                    <td>78792</td>
+                    <td>27600</td>
+                    <td>27455</td>
+                    <td>(A-B-C) = 23737</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Water available from runoff sources for groundwater recharge</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Land Use type</th>
+                    <th>Area</th>
+                    <th>Runoff</th>
+                    <th>Annual Rainfall</th>
+                    <th>Available Rooftop Runoff for Collection</th>
+                    <th>Available Rainwater for Usage</th>
+                    <th>Proposed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Open Spaces including pavements, approach roads & landscapes</td>
+                    <td>23737</td>
+                    <td>0.35</td>
+                    <td>0.890</td>
+                    <td>73794</td>
+                    <td>73794 M<sup>3</sup> / 365 Days</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>New Structure Suggestions</h2>
+        <ul>
+            <li>Injection Wells
+                <br> <img src="./injectionWell.png" alt="">
+            </li>
+            <li>Suggestion 2</li>
+            <li>suggestion 3</li>
+        </ul>
+
+        <label for="remarks">Insights:</label><br>
+        <textarea id="remarks" name="remarks" rows="4" cols="50"></textarea>
+    </div>
+
+    <div>
+        <h1>Digital Water Flowmeter</h1>
+        <img src="./78033c8b2fcaded8d059294e141bd473.png"> <br>
+
+        <label for="remarks">Insights:</label><br>
+        <textarea id="remarks" name="remarks" rows="4" cols="50"></textarea>
+    </div>
+    
+    <div>
+        <h1>Industrial Process optimization</h1>
+
+        <label for="remarks">Insights:</label><br>
+        <textarea id="remarks" name="remarks" rows="4" cols="50"></textarea>
+    </div>
+
+    <div>
+        <h1>ETP/STP Optimizations and recycled water reuse study</h1>
+
+        <label for="remarks">Insights:</label><br>
+        <textarea id="remarks" name="remarks" rows="4" cols="50"></textarea>
+    </div>
+
+    <div>
+        <h1>Updating Toilet Equipment and Tap connections</h1>
+
+        <label for="remarks">Insights:</label><br>
+        <textarea id="remarks" name="remarks" rows="4" cols="50"></textarea>
+    </div>
+
+    <div>
+        <h1>Custom Recommendation</h1>
+
+        <label for="remarks">Insights:</label><br>
+        <textarea id="remarks" name="remarks" rows="4" cols="50"></textarea>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Land Use Data</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        div {
+            border: 1px solid  black;
+            padding: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        thead, th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    
+    <div>     
+    <label for="projects">Select Project:</label>
+    <select id="projects">
+        <option value="project1">Project 1</option>
+        <option value="project2">Project 2</option>
+        <option value="project3">Project 3</option>
+    </select>
+    </div>
+
+    <div>
+        <h1>Rain Water Harvesting</h1>
+    
+        <h2>Rainfall Pattern at the location</h2>
+        <table>
+            <thead>
+                <tr>
+                    <td rowspan="2">Sl No</td>
+                    <td rowspan="2">Rain Gauge Stations</td>
+                    <td rowspan="2">Normal Rainfall (mm)</td>
+                    <td colspan="9">Actual Anual Rainfall</td>
+                </tr>
+                <tr>
+                    <td>2016</td>
+                    <td>2017</td>
+                    <td>2018</td>
+                    <td>2019</td>
+                    <td>2020</td>
+                    <td>2021</td>
+                    <td>2022</td>
+                    <td>2023</td>
+                    <td>2024</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Bangalore South</td>
+                    <td>15</td>
+                    <td>890</td>
+                    <td>794</td>
+                    <td>1359</td>
+                    <td>852</td>
+                    <td>899</td>
+                    <td>1169</td>
+                    <td>1208</td>
+                    <td>1128</td>
+                    <td>2023</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Rooftop Rainwater Potential</h2>
+        <h3>Proposed Scenario</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Land Use type</th>
+                    <th>are</th>
+                    <th>run off</th>
+                    <th>annual rainfall</th>
+                    <th>available rooftop runoff for collection</th>
+                    <th>available rainwater for usage</th>
+                    <th>proposed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>B3</td>
+                    <td>2687</td>
+                    <td>0.8</td>
+                    <td>0.89</td>
+                    <td>1913</td>
+                    <td>66</td>
+                    <td>TRUE</td>
+                </tr>
+                <tr>
+                    <td>B4</td>
+                    <td>7221</td>
+                    <td>0.8</td>
+                    <td>0.89</td>
+                    <td>5134</td>
+                    <td>66</td>
+                    <td>TRUE</td>
+                </tr>
+            </tbody>
+        </table>
+    
+        <h3>Existing Sceniario</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Land Use type</th>
+                    <th>are</th>
+                    <th>run off</th>
+                    <th>annual rainfall</th>
+                    <th>available rooftop runoff for collection</th>
+                    <th>available rainwater for usage</th>
+                    <th>proposed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>A1</td>
+                    <td>7706</td>
+                    <td>0.8</td>
+                    <td>0.89</td>
+                    <td>5487</td>
+                    <td>66</td>
+                    <td>FALSE</td>
+                </tr>
+                <tr>
+                    <td>B1</td>
+                    <td>7446</td>
+                    <td>0.8</td>
+                    <td>0.89</td>
+                    <td>5301</td>
+                    <td>66</td>
+                    <td>FALSE</td>
+                </tr>
+                <tr>
+                    <td>B2</td>
+                    <td>2405</td>
+                    <td>0.8</td>
+                    <td>0.89</td>
+                    <td>1712</td>
+                    <td>66</td>
+                    <td>FALSE</td>
+                </tr>
+            </tbody>
+        </table>
+            
+        <h2>Rainwater Potential from open spaces</h2>
+        <h3>Area of Runoff Available</h3>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td>A (In Sq. M)</td>
+                    <td>B (In Sq. M)</td>
+                    <td>C (In Sq. M)</td>
+                    <td>D (In Sq. M)</td>
+                </tr>
+                <tr>
+                    <td>Total Area of the Plant</td>
+                    <td>Area used for Garden and Green Cover</td>
+                    <td>Area Covered by Various Block</td>
+                    <td>Approximate Area availabe as Open Space</td>
+                </tr>
+                <tr>
+                    <td>78792</td>
+                    <td>27600</td>
+                    <td>27455</td>
+                    <td>(A-B-C) = 23737</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Rainwater Potential from open spaces</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Land Use type</th>
+                    <th>are</th>
+                    <th>run off</th>
+                    <th>annual rainfall</th>
+                    <th>available rooftop runoff for collection</th>
+                    <th>available rainwater for usage</th>
+                    <th>proposed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Open Spaces including pavements, approach roads & landscapes</td>
+                    <td>23737</td>
+                    <td>0.35</td>
+                    <td>0.890</td>
+                    <td>73794</td>
+                    <td>73794 M<sup>3</sup> / 365 Days</td>
+                </tr>
+            </tbody>
+        </table>
+    
+        <label for="remarks">Insights:</label> </br>
+        <textarea id="remarks" name="remarks" rows="4" cols="50"></textarea>
+    
+    </div>
+
+    <div>
+        <h1>Groundwater Recharge</h1>
+
+        <h2>Runoff water availabe form open sources</h2>
+        <h3>Area of Runoff Available</h3>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td>A (In Sq. M)</td>
+                    <td>B (In Sq. M)</td>
+                    <td>C (In Sq. M)</td>
+                    <td>D (In Sq. M)</td>
+                </tr>
+                <tr>
+                    <td>Total Area of the Plant</td>
+                    <td>Area used for Garden and Green Cover</td>
+                    <td>Area Covered by Various Block</td>
+                    <td>Approximate Area availabe as Open Space</td>
+                </tr>
+                <tr>
+                    <td>78792</td>
+                    <td>27600</td>
+                    <td>27455</td>
+                    <td>(A-B-C) = 23737</td>
+                </tr>
+            </tbody>
+        </table>
+
+        
+        <h3>Water available from runoff sources for ground water recharge</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Land Use type</th>
+                    <th>are</th>
+                    <th>run off</th>
+                    <th>annual rainfall</th>
+                    <th>available rooftop runoff for collection</th>
+                    <th>available rainwater for usage</th>
+                    <th>proposed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Open Spaces including pavements, approach roads & landscapes</td>
+                    <td>23737</td>
+                    <td>0.35</td>
+                    <td>0.890</td>
+                    <td>73794</td>
+                    <td>73794 M<sup>3</sup> / 365 Days</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>New Structure Suggestions</h2>
+        <ul>
+            <li>Injection Wells
+            </br> <img src="./injectionWell.png" alt="">
+            </li>
+            <li>Suggestion 2</li>
+            <li>suggestion 3</li>
+        </ul>
+
+        <label for="remarks">Insights:</label> </br>
+        <textarea id="remarks" name="remarks" rows="4" cols="50"></textarea>
+    
+    </div>
+
+    <div>
+        <h1>Digital Water Flowmeter</h1>
+        <img src="./78033c8b2fcaded8d059294e141bd473.png"> </br>
+
+        
+        <label for="remarks">Insights:</label> </br>
+        <textarea id="remarks" name="remarks" rows="4" cols="50"></textarea>
+    
+    </div>
+    
+    <div>
+        <h1>Industrial Process optimization</h1>
+
+        
+        <label for="remarks">Insights:</label> </br>
+        <textarea id="remarks" name="remarks" rows="4" cols="50"></textarea>
+    
+    </div>
+
+    <div>
+        <h1>ETP/STP Optimizations and recycled water reuse study</h1>
+
+        
+        <label for="remarks">Insights:</label> </br>
+        <textarea id="remarks" name="remarks" rows="4" cols="50"></textarea>
+    
+    </div>
+
+
+    <div>
+        <h1>Updating Toilet Equipment and Tap connections</h1>
+
+        
+        <label for="remarks">Insights:</label> </br>
+        <textarea id="remarks" name="remarks" rows="4" cols="50"></textarea>
+    
+    </div>
+    <div>
+        <h1>Custom Recomendation</h1>
+
+        
+        <label for="remarks">Insights:</label> </br>
+        <textarea id="remarks" name="remarks" rows="4" cols="50"></textarea>
+    
+    </div>
+</body></html> -->
