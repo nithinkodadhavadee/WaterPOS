@@ -1,0 +1,378 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Rain Water Harvesting</h1>
+<h2>Rainfall Pattern at the location</h2>
+<table>
+    <thead>
+        <tr>
+            <td rowspan="2">Sl No</td>
+            <td rowspan="2">Rain Gauge Stations</td>
+            <td rowspan="2">Normal Rainfall (mm)</td>
+            <td colspan="9">Actual Annual Rainfall</td>
+        </tr>
+        <tr>
+            <td>2016</td>
+            <td>2017</td>
+            <td>2018</td>
+            <td>2019</td>
+            <td>2020</td>
+            <td>2021</td>
+            <td>2022</td>
+            <td>2023</td>
+            <td>2024</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Bangalore South</td>
+            <td>15</td>
+            <td>890</td>
+            <td>794</td>
+            <td>1359</td>
+            <td>852</td>
+            <td>899</td>
+            <td>1169</td>
+            <td>1208</td>
+            <td>1128</td>
+            <td>2023</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Existing Scenario</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Land Use type</th>
+            <th>Area</th>
+            <th>Runoff</th>
+            <th>Annual Rainfall</th>
+            <th>Available Rooftop Runoff for Collection</th>
+            <th>Available Rainwater for Usage</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in range(table_data["existingTotal"]) %}
+        <tr>
+            <td>{{ table_data["existingBuildings"][i] }}</td>
+            <td>{{ table_data["existingArea"][i] }}</td>
+            <td>0.8</td>
+            <td>0.89</td>
+            <td>{{ 0.8 * 0.89 * table_data["existingArea"][i] }}</td>
+            <td>{{ (0.8 * 0.89 * table_data["existingArea"][i]) / 365 }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Rooftop Rainwater Potential</h2>
+<h3>Proposed Scenario</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Land Use type</th>
+            <th>Area</th>
+            <th>Runoff</th>
+            <th>Annual Rainfall</th>
+            <th>Available Rooftop Runoff for Collection</th>
+            <th>Available Rainwater for Usage</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in range(table_data["proposedTotal"]) %}
+        <tr>
+            <td>{{ table_data["proposedBuilding"][i] }}</td>
+            <td>{{ table_data["proposedArea"][i] }}</td>
+            <td>0.8</td>
+            <td>0.89</td>
+            <td>{{ 0.8 * 0.89 * table_data["proposedArea"][i] }}</td>
+            <td>{{ (0.8 * 0.89 * table_data["proposedArea"][i]) / 365 }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Rainwater Harvesting from open spaces</h3>
+<h4>Area of Runoff Available</h4>
+
+<table>
+    <tbody>
+        <tr>
+            <td>A (In Sq. M)</td>
+            <td>B (In Sq. M)</td>
+            <td>C (In Sq. M)</td>
+            <td>D (In Sq. M)</td>
+            <td>E (In Sq. M)</td>
+        </tr>
+        <tr>
+            <td>Total Area of the Plant</td>
+            <td>Area used for Garden and Green Cover</td>
+            <td>Area Covered by Various Block</td>
+            <td>area under green belt / forset area (which doesn't include the garden or lawns)</td>
+            <td>Approximate Area available as Open Space</td>
+        </tr>
+        <tr>
+            <td>{{ open_spaces[0][0] }}</td>
+            <td>{{ open_spaces[0][1] }}</td>
+            <td>{{ open_spaces[0][2] }}</td>
+            <td>{{ open_spaces[0][3] }}</td>
+            <td>(A-B-C-D) = {{ open_spaces[0][4] }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4> Rainwater Harvesting from existing area</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Land Use type</th>
+            <th>Area</th>
+            <th>Runoff</th>
+            <th>Annual Rainfall</th>
+            <th>Available Rooftop Runoff for Collection</th>
+            <th>Available Rainwater for Usage</th>
+            <th>Proposed</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Open Spaces including pavements, approach roads & landscapes</td>
+            <td> {{ open_spaces[1][1]}}</td>
+            <td>0.35</td>
+            <td>0.890</td>
+            <td>{{ open_spaces[1][4]}}</td>
+            <td>{{ open_spaces[1][5]}} M<sup>3</sup> / 365 Days</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h4> Rainwater Harvesting Potential area</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Land Use type</th>
+            <th>Area</th>
+            <th>Runoff</th>
+            <th>Annual Rainfall</th>
+            <th>Available Rooftop Runoff for Collection</th>
+            <th>Available Rainwater for Usage</th>
+            <th>Proposed</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Open Spaces including pavements, approach roads & landscapes</td>
+            <td> {{ open_spaces[1][1]}}</td>
+            <td>0.35</td>
+            <td>0.890</td>
+            <td>{{ open_spaces[1][4]}}</td>
+            <td>{{ open_spaces[1][5]}} M<sup>3</sup> / 365 Days</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h6>Existing condition
+</h6>
+<table>
+    <tr>
+        <td>Volume of runoff</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Sump Size Available</td>
+        <td></td>
+    </tr>
+</table>
+
+
+<h6>Additional Savings
+</h6>
+<table>
+    <tr>
+        <td>Volume of runoff</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Additional Sump Size Required</td>
+        <td></td>
+    </tr>
+</table>
+
+<h6></h6>
+
+<table>
+    <tr>
+        <td>Tentative Cost Estimation:</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>ROI:</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Time of Completion:</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Estimated Fresh/Raw Water Saving:</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Estimated Cost Saving:</td>
+        <td></td>
+    </tr>
+</table>
+
+<label for="remarks">Insights:</label><br>
+<textarea id="remarks" name="remarks" rows="4" cols="50"></textarea>
+</div>
+
+<div>
+    <h1>Groundwater Recharge</h1>
+
+    <h2>Runoff water available from open sources</h2>
+    <h3>Area of Runoff Available</h3>
+    <table>
+        <tbody>
+            <tr>
+                <td>A (In Sq. M)</td>
+                <td>B (In Sq. M)</td>
+                <td>C (In Sq. M)</td>
+                <td>D (In Sq. M)</td>
+                <td>E (In Sq. M)</td>
+            </tr>
+            <tr>
+                <td>Total Area of the Plant</td>
+                <td>Area used for Garden and Green Cover</td>
+                <td>Area Covered by Various Block</td>
+                <td>area under green belt / forset area (which doesn't include the garden or lawns)</td>
+                <td>Approximate Area available as Open Space</td>
+            </tr>
+            <tr>
+                <td>{{ open_spaces[0][0] }}</td>
+                <td>{{ open_spaces[0][1] }}</td>
+                <td>{{ open_spaces[0][2] }}</td>
+                <td>{{ open_spaces[0][3] }}</td>
+                <td>(A-B-C-D) = {{ open_spaces[0][4] }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Water available from runoff sources for groundwater recharge</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Land Use type</th>
+                <th>Area</th>
+                <th>Runoff</th>
+                <th>Annual Rainfall</th>
+                <th>Available Rooftop Runoff for Collection</th>
+                <th>Available Rainwater for Usage</th>
+                <th>Proposed</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Open Spaces including pavements, approach roads & landscapes</td>
+                <td> {{ open_spaces[1][1]}}</td>
+                <td>0.35</td>
+                <td>0.890</td>
+                <td>{{ open_spaces[1][4]}}</td>
+                <td>{{ open_spaces[1][5]}} M<sup>3</sup> / 365 Days</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <h4> Rainwater Harvesting Potential area</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Land Use type</th>
+                <th>Area</th>
+                <th>Runoff</th>
+                <th>Annual Rainfall</th>
+                <th>Available Rooftop Runoff for Collection</th>
+                <th>Available Rainwater for Usage</th>
+                <th>Proposed</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Open Spaces including pavements, approach roads & landscapes</td>
+                <td> {{ open_spaces[1][1]}}</td>
+                <td>0.35</td>
+                <td>0.890</td>
+                <td>{{ open_spaces[1][4]}}</td>
+                <td>{{ open_spaces[1][5]}} M<sup>3</sup> / 365 Days</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h6>Existing condition
+    </h6>
+    <table>
+        <tr>
+            <td>Volume of runoff</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Sump Size Available</td>
+            <td></td>
+        </tr>
+    </table>
+    
+    
+    <h6>Additional Savings
+    </h6>
+    <table>
+        <tr>
+            <td>Volume of runoff</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Additional Sump Size Required</td>
+            <td></td>
+        </tr>
+    </table>
+    <h6></h6>
+    <table>
+        <tr>
+            <td>Tentative Cost Estimation:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>ROI:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Time of Completion:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Estimated Fresh/Raw Water Saving:</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Estimated Cost Saving:</td>
+            <td></td>
+        </tr>
+    </table>
+
+    
+
+    <label for="remarks">Insights:</label><br>
+    <textarea id="remarks" name="remarks" rows="4" cols="50"></textarea>
+
+
+
+    {% endblock %}

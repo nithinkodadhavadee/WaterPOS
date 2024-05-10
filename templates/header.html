@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}Your Website{% endblock %}</title>
+    <!-- Add your header CSS, meta tags, etc. here -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <header>
+        <!-- Your header content goes here -->
+        <h1>Water Audit</h1>
+        <nav>
+            <!-- Your navigation links go here -->
+            <ul>
+                <!-- <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li> -->
+                <!-- Add more navigation links as needed -->
+                {% if 'logged_in' in session %}
+                <li><a href="/logout">Logout</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
