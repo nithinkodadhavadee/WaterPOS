@@ -5,6 +5,7 @@ import requests
 def generate_html_form(form_data, company_type=None, id=None):
     count = 0
     filtered_response = []
+    filtered_entries = []
     if company_type == None:
         company_type=session.get('type')
     if id == None:
@@ -17,6 +18,7 @@ def generate_html_form(form_data, company_type=None, id=None):
     try:
         ref_api_url = "https://www.appsheet.com/api/v2/apps/80ca4d2d-67ba-4f5e-9dc2-6c954355c70c/tables/" 
         ref_api_queries = " Multi Input Form/Action?applicationAccessKey=V2-qCjEs-Vnmn2-4X5Zm-bDW8b-LUC3U-k3i1H-9DovC-fkSY6"
+        entries_api_queries = " Form/Action?applicationAccessKey=V2-qCjEs-Vnmn2-4X5Zm-bDW8b-LUC3U-k3i1H-9DovC-fkSY6"
             
         request_body = {
             "Action": "Find",
@@ -28,16 +30,28 @@ def generate_html_form(form_data, company_type=None, id=None):
         headers = {"Content-Type":"application/json"}
         response = requests.post(ref_api_url+ company_type +ref_api_queries, json=request_body, headers=headers)
         json_response = response.json()
-        print(json_response)
+
+        response = requests.post(ref_api_url+ company_type +entries_api_queries, json=request_body, headers=headers)
+        entries_response = response.json()
+
         for field in json_response: 
             if field["Project ID"] == id:
                 filtered_response.append(field)
 
-        print(filtered_response)
+        for row in entries_response:
+            print()
+            if row["ID"] == id:
+                filtered_entries = row
+
+        print("--------------------------------------------------------------------------")
+        print(filtered_entries)
     except:
-        pass
+        print("--------------------------------------------------------------------------")
+        print("\n\nERROR\n\n")
+        print("--------------------------------------------------------------------------")
     html_code = ""
     for field in form_data:
+        print(field["Text"])
         if field["Type"] == "label":
             # If it's a label, add a heading
             html_code += f'<h3>{field["Text"]}</h3>'
@@ -55,13 +69,16 @@ def generate_html_form(form_data, company_type=None, id=None):
                 html_code += f'<span style="color:red;">*</span>'
 
             if field["Type"] == "text":
-                html_code += f'<input type="text" name="{field["_RowNumber"]}">'
+                html_code += f'<input type="text" name="{field["_RowNumber"]}" value="{filtered_entries[field["Text"]]}">'
             elif field["Type"] == "date":
-                html_code += f'<input type="date" placeholder="dd-mm-yyyy" name="{field["_RowNumber"]}">'
+                html_code += f'<input type="date" placeholder="dd-mm-yyyy" name="{field["_RowNumber"]}" value="{filtered_entries[field["Text"]]}">'
             elif field["Type"] == "number":
-                html_code += f'<input type="number" name="{field["_RowNumber"]}">'
+                print("----------------------------------------------")
+                print("\t", field["Text"], "\n\t", filtered_entries[field["Text"]])
+                print("----------------------------------------------")
+                html_code += f'<input type="number" name="{field["_RowNumber"]}" value="{filtered_entries[field["Text"]]}">'
             elif field["Type"] == "email":
-                html_code += f'<input type="email" name="{field["_RowNumber"]}">'
+                html_code += f'<input type="email" name="{field["_RowNumber"]}" value="{filtered_entries[field["Text"]]}">'
             elif field["Type"] == "list":
                 if response.status_code == 200:
                     try:
@@ -72,11 +89,11 @@ def generate_html_form(form_data, company_type=None, id=None):
                 else:
                     html_code += '<div>Cannot generate the form</div>'
             elif field["Type"] == "longtext":
-                html_code += f'<textarea name="{field["_RowNumber"]}" rows="4" cols="50"></textarea>'
+                html_code += f'<textarea name="{field["_RowNumber"]}" rows="4" cols="50" value="{filtered_entries[field["Text"]]}"></textarea>'
             elif field["Type"] == "float":
-                html_code += f'<input type="number" step="0.01" name="{field["_RowNumber"]}">'
+                html_code += f'<input type="number" step="0.01" name="{field["_RowNumber"]}" value="{filtered_entries[field["Text"]]}">'
             elif field["Type"] == "url":
-                html_code += f'<input type="url" name="{field["_RowNumber"]}">'
+                html_code += f'<input type="url" name="{field["_RowNumber"]}" value="{filtered_entries[field["Text"]]}">'
 
             html_code += '<br><br>'
 
