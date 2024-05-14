@@ -1,0 +1,311 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        Company: <strong> {{ company }} </strong> </br></br>
+        <!-- Main content -->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            <div id="report" contenteditable>
+                <div>
+                    {{ executiveSummary | safe }}
+                </div>
+                <div>
+                    <h1>1. Introduction</h1>
+                    <p>Water, essential for life and central to natural capital, is integral to diverse business
+                        activities. Global risks reports, such as the World Economic Forum's (WEF) assessment in 2017,
+                        identify water crises as among the most impactful risks to businesses worldwide. The increasing
+                        demands and pressures on water resources underscore the urgency for effective water management
+                        strategies. This report focuses on conducting a remote water audit at {company name}, {place},
+                        aiming to identify suitable water management and conservation strategies to minimize operational
+                        risks.</p>
+                    <h2>I. Global Water Challenges:</h2>
+                    <h3>A. Business Impacts:</h3>
+                    <p>Water risks transcend industry sectors, affecting operational resilience and sustainability. The
+                        WEF's recognition of water crises as a top global risk highlights the imperative for businesses
+                        to address water-related challenges proactively.
+                    </p>
+                    <h3>B. Conservation Strategies:</h3>
+                    <p>Effective water management begins with monitoring and mapping water consumption across various
+                        processes. Regular water audits play a crucial role in quantifying water usage and losses,
+                        enabling businesses to diagnose challenges and implement optimal solutions.
+                    </p>
+                    <h2>II. National Water Landscape (India):</h2>
+                    <h3>A. Resource Scarcity:</h3>
+                    <p>India's significant population and limited water resources pose challenges exacerbated by uneven
+                        distribution and climate variability. Policy frameworks, such as the National Water Policy, aim
+                        to address these challenges through unified governance and sustainable management practices.
+                    </p>
+                    <h3>B. Sectoral Pressures:</h3>
+                    <p>The industrial sector, a major water consumer, faces growing demands amid regulatory gaps and
+                        governance inefficiencies. Inequitable distribution and pollution exacerbate water stress,
+                        highlighting the need for comprehensive policies and regulatory reforms.
+                    </p>
+                    <h2>III. Industrial Water Dynamics:
+                    </h2>
+                    <h3>A. Consumption Trends:
+                    </h3>
+                    <p>Industrial growth drives water demand, with groundwater and surface water as primary sources.
+                        Conflicting estimates underscore the need for accurate data and regulatory oversight to manage
+                        water consumption effectively.
+                    </p>
+                    <h3>B. Pollution Concerns:
+                    </h3>
+                    <p>Industrial activities contribute to water pollution, posing environmental and social risks.
+                        Inadequate regulations and enforcement further compound these challenges, necessitating
+                        stringent measures for pollution control and sustainable water use.
+                    </p>
+                    <h2>IV. Role of Water Audits:
+                    </h2>
+                    <h3>A. Operational Insights:
+                    </h3>
+                    <P>Water audits offer valuable insights into consumption patterns and losses, enabling businesses to
+                        optimize resource use and mitigate operational risks. Water audit conducted at {company name},
+                        demonstrate the efficacy of water audits in driving conservation outcomes.
+                    </P>
+                    <H3>B. Best Practices:
+                    </H3>
+                    <p>By leveraging data-driven insights and stakeholder engagement, businesses can identify tailored
+                        solutions to minimize risks and enhance operational resilience. Water audits serve as essential
+                        tools for promoting sustainable water management practices and achieving long-term business
+                        sustainability.
+                    </p>
+                    <h2>V. CGWA guidelines:
+                    </h2>
+                    <p>As per the notification dated 24/09/2020 from CGWA, all industries abstracting groundwater
+                        exceeding 100 m3/day must conduct an annual water audit through auditors certified by
+                        CII/FICCI/NPC/PHDCCI. Following completion, they are required to submit their water audit
+                        reports to CGWA within three months.
+                    </p>
+                    <p>Water audit help industries, hospitals and commercial establishments to adhere to CGWA and state
+                        pollution control board guideline mandates and adhere to compliances.
+                    </p>
+                    <p>The Central Groundwater Board (CGWB) oversees groundwater quality and quantity, lacking authority
+                        to charge for industrial groundwater use. The Central Pollution Control Board (CPCB) and State
+                        Pollution Control Boards (SPCBs) regulate industrial water pollution but lack control over water
+                        sourcing. This gap hinders water conservation and pollution control efforts. While some
+                        industries implement zero-discharge projects, others discharge untreated effluents. Experts
+                        advocate for self-regulation and best practices dissemination by industry associations like
+                        FICCI, CII, and ASSOCHAM. A robust industrial water policy must empower regulatory bodies,
+                        promote collaboration, and incentivize conservation to ensure sustainable water management in
+                        India's industrial sector.
+                    </p>
+                    <p>In conclusion, effective water management requires proactive measures, informed decision-making,
+                        and stakeholder collaboration. As businesses navigate the complex water landscape, addressing
+                        water-related challenges becomes imperative for ensuring resilience and sustainability in the
+                        face of growing risks and pressures.
+                    </p>
+
+
+
+                    <H2>1.1 What is water audit and why is it important?</H2>
+
+                    <p>Water audit is a fundamental process aimed at assessing and managing water loss within
+                        distribution systems, encompassing variables such as seepage, evaporation, leakage, and
+                        unauthorized withdrawals. It enhances comprehension of water utilization post-source while
+                        facilitating meticulous documentation of distribution systems and user profiles. This process
+                        optimizes resource management, bolstering reliability and efficiency. By diagnosing underlying
+                        issues and proposing tailored solutions, water audit yields reductions in water loss, augments
+                        financial performance, and fortifies supply system reliability. Additionally, it fosters
+                        enhanced public health and property safeguards, improves public relations, and mitigates legal
+                        liabilities and disruptions. Aligned with the UN Sustainable Development Goal 6, "Clean Water
+                        and Sanitation," water audit underscores the imperative for businesses to prioritize water
+                        conservation amid escalating global scarcity. By recognizing the interconnectedness of water
+                        availability, business operations, and global water challenges, water audit advocates for
+                        sustainable practices to alleviate adverse impacts on communities and ecosystems. In essence,
+                        water audit serves as an indispensable tool for evaluating performance, identifying
+                        inefficiencies, and steering future system enhancements.</p>
+
+                    <h2>1.2 Steps of Water audit</h2>
+                    <p>Conducting a comprehensive water audit involves several steps, including water supply and usage
+                        study, process analysis, system audit, discharge analysis, and the preparation of a detailed
+                        water audit report. In this report, we will outline the key steps involved in conducting a water
+                        audit based on insights from two comprehensive reports.</p>
+                    {{ introductionString | safe }}
+
+                    <h1>2. Scope of Work</h1>
+                    <p>The scope of this water audit encompasses several key areas aimed at assessing, monitoring, and
+                        improving the water supply and usage system of {company name}. By evaluating the entire water
+                        management system, a water audit identifies opportunities for conservation, efficiency
+                        improvements, and sustainability measures. The scope of work is listed in detail below:
+                    </p>
+
+                    <h2>2.1. Water Supply System Assessment</h2>
+                    <p>A thorough evaluation of the water supply system includes:
+                    <ul>
+                        <li><u>Status of Water Supply Components:</u> Assessing the condition and functionality of
+                            various components within the water supply network, such as pipes, pumps, valves, and
+                            fittings.
+                        </li>
+                        <li><u>Source Identification:</u> Documenting the types of water sources, including municipal
+                            supply, groundwater, surface water, and rainwater harvesting systems.
+                        </li>
+                        <li>
+                            <u>Water Flow and Metering Devices:</u> Evaluating the presence, accuracy, and condition of
+                            water flow meters and gauging devices to ensure accurate measurement of water input and
+                            output volumes.
+                        </li>
+                    </ul>
+
+                    </p>
+
+                    <h2>2.2. Water Utilization Analysis</h2>
+                    <p>Understanding the patterns and efficiency of water use within the facility is crucial. This
+                        includes:
+                    <ul>
+                        <li><u>Consumption Patterns:</u> Mapping out the water usage across different sections of the
+                            establishment, such as production areas, administrative buildings, canteens, and washrooms
+                            etc
+                        </li>
+                        <li><u>Water Balance Analysis:</u> Calculating the input and output volumes and mapping out the
+                            water distribution across various points of {company name} to create a comprehensive water
+                            balance diagram, highlighting areas of high consumption and potential inefficiencies. First
+                            the baseline water balance chart and diagram is laid out and then after finalizing the water
+                            conservation methods an ideal water balance chart and diagram is established.
+                        </li>
+                        <li><u>Specific Water Use and Conservation:</u> Identifying specific water use points and
+                            potential conservation opportunities to reduce overall consumption.</li>
+                    </ul>
+                    </p>
+
+                    <h2>2.3. Wastewater Management</h2>
+                    <p>Proper management of wastewater is essential for sustainability and regulatory compliance:
+                    <ul>
+                        <li><u>Generation and Treatment:</u> Identifying the sources and volumes of wastewater generated
+                            from all utilities and processes. Evaluating the existing wastewater treatment facilities
+                            i.e. ETP/STP for their efficiency and effectiveness.
+                        </li>
+                        <li><u>Recycling and Reuse:</u> First investigating the current usage point of treated
+                            wastewater across the facility from both Effluent treatment plant and sewage treatment
+                            plant. Further investigating additional opportunities for recycling and reusing treated
+                            wastewater within the facility. This includes assessing the feasibility of using treated
+                            wastewater for irrigation, cooling, or other non-potable applications.
+                        </li>
+                    </ul>
+                    </p>
+
+                    <h2>2.4. System Losses and Leak Detection</h2>
+                    <p>Detecting and mitigating water losses within the system is a critical component of a water audit:
+                    <ul>
+                        <li><u>Leakage Identification:</u> Using monitoring devices such as pressure and flow meters to
+                            detect leaks and inefficiencies in the water distribution network.
+                        </li>
+                        <li><u>System Efficiency:</u> Evaluating the operational efficiency of water-using systems and
+                            recommending upgrades or repairs to reduce losses.</li>
+                    </ul>
+                    </p>
+
+                    <h2>2.5. Water Quality Assessment</h2>
+                    <p>Ensuring the quality of water at various usage points is vital for health and operational
+                        efficiency:
+                    <ul>
+                        <li><u>Water Quality Monitoring:</u> Regular monitoring of water quality at strategic points
+                            within the distribution system to detect contaminants and ensure compliance with health
+                            standards.
+                        </li>
+                        <li><u>Quality Requirements Mapping:</u> Mapping out the water quality requirements for
+                            different processes and user areas to ensure that the water supplied meets the necessary
+                            standards.</li>
+                    </ul>
+                    </p>
+
+                    <h2>2.6. Rainwater Harvesting and Groundwater Recharge
+                    </h2>
+                    <p>Incorporating sustainable water sources is a key aspect of modern water management:
+                    <ul>
+                        <li><u>Rainwater Harvesting:</u> Evaluating existing rainwater harvesting systems and their
+                            efficiency. Identifying opportunities for enhancing rainwater capture and utilization.
+                        </li>
+                        <li>
+                            <u>Groundwater Recharge:</u> Studying the current recharge structures and their efficiency
+                            first. Then implementing additional artificial groundwater recharge techniques plan to
+                            improve the sustainability of water sources and reduce dependency on external supplies.
+                        </li>
+                    </ul>
+                    </p>
+
+                    <h2>2.7. Cost Analysis</h2>
+                    <p>A detailed financial analysis helps in understanding the economic impact of water usage and
+                        conservation measures:
+                    <ul>
+                        <li><u>Cost of Water Supply:</u> Calculating the total expenditure on water supply, including
+                            operation and maintenance costs.
+                        </li>
+                        <li><u>Financial Savings:</u> Identifying potential cost savings through water conservation
+                            measures, improved efficiency, and reduced wastage.</li>
+                    </ul>
+                    </p>
+
+                    <h2>2.8. Technological Recommendations</h2>
+                    <p>Adopting new technologies can significantly enhance water management:
+                    <ul>
+                        <li><u>Advanced Metering Infrastructure (AMI):</u> Recommending the adoption of AMI systems for
+                            real-time data collection and improved resource management.
+                        </li>
+                        <li>
+                            <u>Energy and Water Fixtures:</u> Assessing the performance of existing water circulating
+                            pumps and motors, and recommending energy-efficient fixtures.
+
+                        </li>
+                    </ul>
+                    </p>
+
+                    <h2>2.9. Comprehensive Water Audit Report</h2>
+                    <p>The final audit report should provide a detailed overview of the findings, recommendations, and
+                        actionable insights:
+                    <ul>
+                        <li><u>Consumption and Wastewater Patterns:</u> Documenting the water consumption and wastewater
+                            generation patterns within the facility.
+                        </li>
+                        <li>
+                            <u>Water Balance and Mapping:</u> Presenting a complete water balance diagram and mapping
+                            out water quality requirements.
+
+                        </li>
+                        <li><u>Opportunities for Conservation:</u> Highlighting specific opportunities for water
+                            conservation and the methods for implementing these measures.
+                        </li>
+                        <li><u>Financial Analysis:</u> Providing a thorough financial analysis, including investment
+                            requirements and potential savings.
+                        </li>
+                        <li><u>Schematic Diagrams:</u> Including detailed schematic diagrams of the water distribution
+                            and wastewater treatment systems.</li>
+                    </ul>
+                    </p>
+
+                    {{ scope_of_work | safe }}
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<button id="download-pdf">Download PDF</button>
+{% endblock %}
+
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js" onload="initPdf()"></script>
+<script>
+    // Wait for the document to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // Attach event listener to the button
+        document.getElementById('download-pdf').addEventListener('click', function () {
+            // Initialize jsPDF
+            console.log("Downloading PDF Report");
+            var pdf = new jsPDF();
+
+            // Get the content of the report div
+            var reportContent = document.getElementById('report').innerHTML;
+
+            // Add the content to the PDF
+            pdf.fromHTML(reportContent, 15, 15);
+
+            // Save the PDF
+            var companyName = "{{company}}"
+            companyName = companyName.replace(/\s+/g, '_');
+            var fileName = companyName+"-report.pdf"
+            pdf.save(fileName);
+        });
+    });
+</script>
+{% endblock %}

@@ -29,12 +29,29 @@ def dash_page():
             headers = {"Content-Type":"application/json"}
             form_response = requests.post(form_api_url, json=request_body, headers=headers)
 
-            if form_response.status_code == 200:
-                form_view = generate_html_form(form_response.json(), company_type=company_type, id=company_id)
+            # if form_response.status_code == 200:
+            #     form_view = generate_html_form(form_response.json(), company_type=company_type, id=company_id)
                         
-            # Render the dashboard template with the company name and type
-            return render_template('formPage.html', company=company, form_html = water_matrix_html+form_view)
+            # # Render the dashboard template with the company name and type
+            # return render_template('formPage.html', company=company, form_html = water_matrix_html+form_view)
         
+            form_html = []
+            form_categories = [[]]
+            if form_response.status_code == 200:
+                form_question = form_response.json()
+                for x in form_question:
+                    if x["Type"] == "label":
+                        form_categories.append([])
+                    form_categories[-1].append(x)
+              
+            for x in form_categories:
+                try:
+                    form_generated = generate_html_form(x, company_type=company_type, id=company_id)
+                    print(x)
+                    form_html.append(form_generated)
+                except:
+                    form_html.append("Cannot generate Form") 
+            return render_template('categoryformPage.html', company=company, water_matrix=water_matrix_html, form_html = form_html, company_type=company_type)
             # --------------------------------------------------------
         else:
             # Get company name and type from session data

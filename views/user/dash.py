@@ -29,15 +29,29 @@ def dash_page():
         form_response = requests.post(form_api_url, json=request_body, headers=headers)
         blocks_response = requests.post(blocks_api_url, json=request_body, headers=headers)
 
-        print(form_response.status_code, blocks_response.status_code)
+        form_html = []
+        form_categories = [[]]
         if form_response.status_code == 200:
-            form_view = generate_html_form(form_response.json())
+            # form_view = generate_html_form(form_response.json())
+            form_question = form_response.json()
+            for x in form_question:
+                if x["Type"] == "label":
+                    form_categories.append([])
+                form_categories[-1].append(x)
         if blocks_response.status_code == 200:
             blocks_html = generate_blocks_view(blocks_response.json(), company_id)
 
-        
+        for x in form_categories:
+                try:
+                    form_generated = generate_html_form(x, company_type=company_type, id=company_id)
+                    print(x)
+                    form_html.append(form_generated)
+                except:
+                    form_html.append("Cannot generate Form") 
+        return render_template('categoryformPage.html', company=company, form_html = form_html, blocks_html=blocks_html, company_type=company_type) 
+            
         # Render the dashboard template with the company name and type
-        return render_template('user/dash.html', company=company, company_type=company_type, blocks_html=blocks_html, form_html = form_view)
+        # return render_template('user/dash.html', company=company, company_type=company_type, blocks_html=blocks_html, form_html = form_view)
     else:
         # Redirect to the login page if user is not authenticated
         return redirect(url_for('auth.login_page'))

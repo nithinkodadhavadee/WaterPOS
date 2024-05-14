@@ -1,0 +1,81 @@
+      
+  {% extends "base.html" %}
+  
+  {% block content %}
+  <div class="container-fluid">
+      <div class="row">
+          Company: <strong> {{ company }} </strong> 
+        <br>type: {{ company_type }}
+        </br></br>
+
+          {{ water_matrix | safe}}
+          
+          <div class="tab-pane fade" id="buildingsView" role="tabpanel">
+            <!-- Buildings content goes here -->
+            <!-- <p>This is the buildings content. You can add your buildings-related information here.</p> -->
+            {{ blocks_html | safe }}
+        </div>
+          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+              <div class="tab-content">   
+                <a href="{{ submit_link }}"></a><button>Save</button></a>
+                <div class="tab" style="overflow: hidden; border: 1px solid #ccc; background-color: #f1f1f1;">
+                    <!-- <button class="tablinks" style="background-color: inherit; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; transition: 0.3s;" onclick="openTab(event, 'company-details')">Company Details</button> -->
+                    <button class="tablinks" style="background-color: inherit; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; transition: 0.3s;" onclick="openTab(event, 'freshwater')">Freshwater</button>
+                    <button class="tablinks" style="background-color: inherit; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; transition: 0.3s;" onclick="openTab(event, 'stp-wastewater')">STP Wastewater</button>
+                    <button class="tablinks" style="background-color: inherit; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; transition: 0.3s;" onclick="openTab(event, 'etp')">ETP</button>
+                    <button class="tablinks" style="background-color: inherit; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; transition: 0.3s;" onclick="openTab(event, 'water-leakage')">Water Leakage</button>
+                  </div>
+                  
+                  <!-- <div id="company-details" class="tabcontent" style="display: none; padding: 20px; border: 1px solid #ccc;">
+                    
+                  <h1>Company</h1>
+                  </div> -->
+                  
+                  <div id="freshwater" class="tabcontent" style="display: none; padding: 20px; border: 1px solid #ccc;">
+                    <!-- Freshwater Form Goes Here -->
+                      {{ form_html[1] | safe }}
+                  </div>
+                  
+                  <div id="stp-wastewater" class="tabcontent" style="display: none; padding: 20px; border: 1px solid #ccc;">
+                    <!-- STP Wastewater Form Goes Here -->
+                      {{ form_html[2] | safe }}
+                  </div>
+                  
+                  <div id="etp" class="tabcontent" style="display: none; padding: 20px; border: 1px solid #ccc;">
+                    <!-- ETP Form Goes Here -->
+                      {{ form_html[3] | safe }}
+                  </div>
+                  
+                  <div id="water-leakage" class="tabcontent" style="display: none; padding: 20px; border: 1px solid #ccc;">
+                    <!-- Water Leakage Form Goes Here -->
+                      {{ form_html[4] | safe }}
+                  </div>
+                  
+                  <script>
+                  function openTab(evt, tabName) {
+                    // Hide all tab content
+                    var i, tabcontent, tablinks;
+                    tabcontent = document.getElementsByClassName("tabcontent");
+                    for (i = 0; i < tabcontent.length; i++) {
+                      tabcontent[i].style.display = "none";
+                    }
+                  
+                    // Deactivate all tab buttons
+                    tablinks = document.getElementsByClassName("tablinks");
+                    for (i = 0; i < tablinks.length; i++) {
+                      tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    }
+                  
+                    // Show the specific tab content and mark the button as active
+                    document.getElementById(tabName).style.display = "block";
+                    evt.currentTarget.className += " active";
+                  }
+                  </script>
+                  
+                  
+              </div>
+          </main>
+      </div>
+  </div>
+  {% endblock %}
+  
