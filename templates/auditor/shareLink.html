@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    <p>Share the following link with company to fill up the form:</p>
+    <input type="text" id="link" value="{{ link }}" readonly>
+    <button onclick="copyLink()">Copy Link</button>
+</div>
+
+
+<script>
+    function copyLink() {
+        var linkInput = document.getElementById("link") + "\n\nShare the following link with the company with the following credentials.";
+        linkInput = linkInput+"\nName: "+'{{ form_entry["Name"] }}\nPassword: '+ '{{ form_entry["Pass"] }}'
+        console.log(linkInput);
+        linkInput.select();
+        linkInput.setSelectionRange(0, 99999); /* For mobile devices */
+
+        try {
+            document.execCommand("copy");
+            alert("Link copied to clipboard!");
+        } catch (err) {
+            console.error("Failed to copy: ", err);
+        }
+    }
+</script>
+
+{% endblock %}

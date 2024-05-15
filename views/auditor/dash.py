@@ -1,13 +1,15 @@
 from flask import Blueprint, request, render_template, redirect, url_for, session
 from ..generateFormView import generate_html_form
 from .generateCompaniesView import geenerate_companies_view
+from ..generateBlocksView import generate_blocks_view
+
 import requests
 
 auditor_dash = Blueprint('auditor_dash', __name__)
 
 @auditor_dash.route('/auditor/dash')
 def dash_page():
-    if 'auditor_logged_in' in session:
+    if 'auditor_logged_in' in session and session['auditor_logged_in'] == True:
         if 'company' in request.args and 'type' in request.args and 'name' in request.args:
             # --------------------------------------------------------
             # Get company name and type from session data
@@ -17,7 +19,7 @@ def dash_page():
             water_matrix_html = f'<a href="matrix?type={company_type}&company={company_id}&name={company}"><button>Link to Water Matrix</button></a> </br></br>'
             form_view = "Cannot access the forms"
             
-            form_api_url = "https://www.appsheet.com/api/v2/apps/80ca4d2d-67ba-4f5e-9dc2-6c954355c70c/tables/Automobile Questions/Action?applicationAccessKey=V2-qCjEs-Vnmn2-4X5Zm-bDW8b-LUC3U-k3i1H-9DovC-fkSY6"
+            form_api_url = f"https://www.appsheet.com/api/v2/apps/80ca4d2d-67ba-4f5e-9dc2-6c954355c70c/tables/{company_type} Questions/Action?applicationAccessKey=V2-qCjEs-Vnmn2-4X5Zm-bDW8b-LUC3U-k3i1H-9DovC-fkSY6"
             
             request_body = {
                     "Action": "Find",
@@ -44,15 +46,45 @@ def dash_page():
                         form_categories.append([])
                     form_categories[-1].append(x)
               
+
+            ref_api_url = "https://www.appsheet.com/api/v2/apps/80ca4d2d-67ba-4f5e-9dc2-6c954355c70c/tables/" 
+            ref_api_queries = " Multi Input Form/Action?applicationAccessKey=V2-qCjEs-Vnmn2-4X5Zm-bDW8b-LUC3U-k3i1H-9DovC-fkSY6"
+            entries_api_queries = " Form/Action?applicationAccessKey=V2-qCjEs-Vnmn2-4X5Zm-bDW8b-LUC3U-k3i1H-9DovC-fkSY6"
+            filtered_response = []
+            filtered_entries = []
+
+            response = requests.post(ref_api_url+ company_type +ref_api_queries, json=request_body, headers=headers)
+            json_response = response.json()
+
+            response = requests.post(ref_api_url+ company_type +entries_api_queries, json=request_body, headers=headers)
+            entries_response = response.json()
+
+            for field in json_response: 
+                if field["Project ID"] == company_id:
+                    filtered_response.append(field)
+
+            for row in entries_response:
+                if row["ID"] == company_id:
+                    filtered_entries = row
+        
+
+            blocks_html = "Cannot access buildings"
+            blocks_api_url = "https://www.appsheet.com/api/v2/apps/80ca4d2d-67ba-4f5e-9dc2-6c954355c70c/tables/Blocks Entries/Action?applicationAccessKey=V2-qCjEs-Vnmn2-4X5Zm-bDW8b-LUC3U-k3i1H-9DovC-fkSY6"
+            blocks_response = requests.post(blocks_api_url, json=request_body, headers=headers)
+
+            if blocks_response.status_code == 200:
+                blocks_html = generate_blocks_view(blocks_response.json(), company_id)
+        
+
             for x in form_categories:
                 try:
-                    form_generated = generate_html_form(x, company_type=company_type, id=company_id)
-                    print(x)
+                    form_generated = generate_html_form(x, company_type=company_type, id=company_id, filtered_response=filtered_response, filtered_entries=filtered_entries)
+                    # print(x)
                     form_html.append(form_generated)
                 except:
                     form_html.append("Cannot generate Form") 
-            return render_template('categoryformPage.html', company=company, water_matrix=water_matrix_html, form_html = form_html, company_type=company_type)
-            # --------------------------------------------------------
+            return render_template('categoryformPage.html', company=company, water_matrix=water_matrix_html, form_html = form_html, company_type=company_type, blocks_html=blocks_html)
+            
         else:
             # Get company name and type from session data
             form_view = "Cannot access the forms"

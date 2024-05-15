@@ -40,9 +40,8 @@ def generateViews():
         "form": {},
         "multi": []
     }
-    print(form_entries)
+    
     for x in form_entries:
-        print(x)
         if x["ID"] == company:
             filteredData["form"] = x
     for x in multi_input_entries:

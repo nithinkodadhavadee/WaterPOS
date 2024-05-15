@@ -45,5 +45,6 @@ def login_page():
 @auditor_auth.route('/logout')
 def logout():
     # Clear session data to logout the user
-    session.clear()
+    # session.clear()
+    session['auditor_logged_in'] = False
     return redirect(url_for('auditor_auth.login_page'))

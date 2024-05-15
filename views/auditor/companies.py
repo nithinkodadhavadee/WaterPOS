@@ -73,7 +73,7 @@ def companie_form():
         elif request.method == "POST":
             # Handle form submission
             form_data = request.form
-            print(form_data.to_dict())
+            
             form_data = form_data.to_dict()
             form_entry = {
                 "ID": int(time.time()),
@@ -88,9 +88,25 @@ def companie_form():
                 "Pincode": form_data.get('11', ""),
                 "pass": form_data.get('12', ""),
                 "completed": ""
-
-        }
-            return redirect(url_for('auditor_dash.dash_page'))
+            }
+            
+            companies_form_api = "https://www.appsheet.com/api/v2/apps/80ca4d2d-67ba-4f5e-9dc2-6c954355c70c/tables/Projects/Action?applicationAccessKey=V2-qCjEs-Vnmn2-4X5Zm-bDW8b-LUC3U-k3i1H-9DovC-fkSY6"
+        
+            request_body = {
+                    "Action": "Add",
+                    "Properties": {
+                        "Locale": "en-IN"
+                    },
+                    "Rows":[form_entry]
+                }
+            headers = {"Content-Type":"application/json"}
+            # companies_response = requests.post(companies_form_api, json=request_body, headers=headers)
+        
+            return render_template("auditor/shareLink.html", form_entry=form_entry, link="/login")
+            # if companies_response.status_code == 200:
+            #     return render_template("auditor/shareLink.html", form_entry=form_entry, link="/login")
+            # else:
+            #     return redirect(url_for('auditor_dash.dash_page'))
     else:
         # Redirect to the login page if user is not authenticated
         return redirect(url_for('auditor_auth.login_page'))

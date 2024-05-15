@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, session
 from ..generateFormView import generate_html_form
-from .generateBlocksView import generate_blocks_view
+from ..generateBlocksView import generate_blocks_view
 import requests
 
 dash = Blueprint('dash', __name__)
@@ -44,7 +44,7 @@ def dash_page():
         for x in form_categories:
                 try:
                     form_generated = generate_html_form(x, company_type=company_type, id=company_id)
-                    print(x)
+                    
                     form_html.append(form_generated)
                 except:
                     form_html.append("Cannot generate Form") 

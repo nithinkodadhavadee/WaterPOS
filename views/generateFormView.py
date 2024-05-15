@@ -2,44 +2,15 @@ from .generateTableView import generate_table_view
 from flask import Blueprint, render_template, redirect, url_for, session
 import requests
 
-def generate_html_form(form_data, company_type=None, id=None, submit_link=None):
+def generate_html_form(form_data, company_type=None, id=None, submit_link=None, filtered_response = [], filtered_entries = []):
+    
     count = 0
-    filtered_response = []
-    filtered_entries = []
     if company_type == None:
         company_type=session.get('type')
     if id == None:
         id = session.get("ID")
 
 
-    try:
-        ref_api_url = "https://www.appsheet.com/api/v2/apps/80ca4d2d-67ba-4f5e-9dc2-6c954355c70c/tables/" 
-        ref_api_queries = " Multi Input Form/Action?applicationAccessKey=V2-qCjEs-Vnmn2-4X5Zm-bDW8b-LUC3U-k3i1H-9DovC-fkSY6"
-        entries_api_queries = " Form/Action?applicationAccessKey=V2-qCjEs-Vnmn2-4X5Zm-bDW8b-LUC3U-k3i1H-9DovC-fkSY6"
-            
-        request_body = {
-            "Action": "Find",
-                "Properties": {
-                    "Locale": "en-IN"
-                },
-                "Rows":[]
-            }
-        headers = {"Content-Type":"application/json"}
-        response = requests.post(ref_api_url+ company_type +ref_api_queries, json=request_body, headers=headers)
-        json_response = response.json()
-
-        response = requests.post(ref_api_url+ company_type +entries_api_queries, json=request_body, headers=headers)
-        entries_response = response.json()
-
-        for field in json_response: 
-            if field["Project ID"] == id:
-                filtered_response.append(field)
-
-        for row in entries_response:
-            if row["ID"] == id:
-                filtered_entries = row
-    except:
-        pass
     html_code = ""
     if submit_link:
         html_code += f'<form action="{submit_link}" method="post">'
@@ -72,14 +43,11 @@ def generate_html_form(form_data, company_type=None, id=None, submit_link=None):
                 elif field["Type"] == "email":
                     html_code += f'<input type="email" name="{field["_RowNumber"]}" value="{filtered_entries[field["Text"]]}">'
                 elif field["Type"] == "list":
-                    if response.status_code == 200:
-                        try:
-                            ref_form = filtered_response
-                            html_code += generate_table_view(ref_form, field["Text"])
-                        except:
-                            pass
-                    else:
-                        html_code += '<div>Cannot generate the form</div>'
+                    try:
+                        ref_form = filtered_response
+                        html_code += generate_table_view(ref_form, field["Text"])
+                    except:
+                        pass
                 elif field["Type"] == "longtext":
                     html_code += f'<textarea name="{field["_RowNumber"]}" rows="4" cols="50" value="{filtered_entries[field["Text"]]}"></textarea>'
                 elif field["Type"] == "float":
@@ -90,7 +58,7 @@ def generate_html_form(form_data, company_type=None, id=None, submit_link=None):
                     html_code += f'<input type="checkbox" {'checked' if filtered_entries[field["Text"]] == '1' else ''}>'
                 elif field["Type"] == "select":
                     values = field["Description"].split(',')
-                    select_html = "<select>"
+                    select_html = f'<select name="{field["_RowNumber"]}">'
                     for value in values:
                         selected = 'selected' if filtered_entries[field["Text"]] == value else ''
                         select_html += f'<option value={value} {selected}>{value}</option>'
@@ -107,14 +75,11 @@ def generate_html_form(form_data, company_type=None, id=None, submit_link=None):
                 elif field["Type"] == "email":
                     html_code += f'<input type="email" name="{field["_RowNumber"]}" >'
                 elif field["Type"] == "list":
-                    if response.status_code == 200:
-                        try:
-                            ref_form = filtered_response
-                            html_code += generate_table_view(ref_form, field["Text"])
-                        except:
-                            pass
-                    else:
-                        html_code += '<div>Cannot generate the form</div>'
+                    try:
+                        ref_form = filtered_response
+                        html_code += generate_table_view(ref_form, field["Text"])
+                    except:
+                        pass
                 elif field["Type"] == "longtext":
                     html_code += f'<textarea name="{field["_RowNumber"]}" rows="4" cols="50" ></textarea>'
                 elif field["Type"] == "float":
@@ -125,7 +90,7 @@ def generate_html_form(form_data, company_type=None, id=None, submit_link=None):
                     html_code += f'<input type="checkbox" disabled>'
                 elif field["Type"] == "select":
                     values = field["Description"].split(',')
-                    select_html = "<select>"
+                    select_html = f'<select name="{field["_RowNumber"]}">'
                     for value in values:
                         select_html += f'<option value={value}>{value}</option>'
                     html_code += f'{select_html}</select>'
