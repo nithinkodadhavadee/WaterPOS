@@ -24,6 +24,7 @@
                     <button class="tablinks" style="background-color: inherit; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; transition: 0.3s;" onclick="openTab(event, 'stp-wastewater')">STP Wastewater</button>
                     <button class="tablinks" style="background-color: inherit; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; transition: 0.3s;" onclick="openTab(event, 'etp')">ETP</button>
                     <button class="tablinks" style="background-color: inherit; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; transition: 0.3s;" onclick="openTab(event, 'water-leakage')">Water Leakage</button>
+                    {{ misc_button | safe }}
                   </div>
                   
                   <!-- <div id="company-details" class="tabcontent" style="display: none; padding: 20px; border: 1px solid #ccc;">
@@ -51,6 +52,11 @@
                       {{ form_html[4] | safe }}
                   </div>
                   
+                  <div id="misce" class="tabcontent" style="display: none; padding: 20px; border: 1px solid #ccc;">
+                    
+                    <strong>all miscellaneous questions will end up here</strong>
+                      {{ form_html[5] | safe }}
+                  </div>
                   <script>
                   function openTab(evt, tabName) {
                     // Hide all tab content

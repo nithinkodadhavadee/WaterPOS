@@ -100,13 +100,16 @@ def companie_form():
                     "Rows":[form_entry]
                 }
             headers = {"Content-Type":"application/json"}
-            # companies_response = requests.post(companies_form_api, json=request_body, headers=headers)
+            companies_response = requests.post(companies_form_api, json=request_body, headers=headers)
         
-            return render_template("auditor/shareLink.html", form_entry=form_entry, link="/login")
-            # if companies_response.status_code == 200:
-            #     return render_template("auditor/shareLink.html", form_entry=form_entry, link="/login")
-            # else:
-            #     return redirect(url_for('auditor_dash.dash_page'))
+
+            print(companies_response.status_code)
+            print(companies_response.json())
+            # return render_template("auditor/shareLink.html", form_entry=form_entry)
+            if companies_response.status_code == 200:
+                return render_template("auditor/shareLink.html", form_entry=form_entry)
+            else:
+                return redirect(url_for('auditor_dash.dash_page'))
     else:
         # Redirect to the login page if user is not authenticated
         return redirect(url_for('auditor_auth.login_page'))

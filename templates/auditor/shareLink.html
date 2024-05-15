@@ -3,18 +3,25 @@
 {% block content %}
 <div>
     <p>Share the following link with company to fill up the form:</p>
-    <input type="text" id="link" value="{{ link }}" readonly>
+    <input type="text" id="link" value="localhost:5000/login" readonly>
     <button onclick="copyLink()">Copy Link</button>
 </div>
 
 
 <script>
     function copyLink() {
-        var linkInput = document.getElementById("link") + "\n\nShare the following link with the company with the following credentials.";
-        linkInput = linkInput+"\nName: "+'{{ form_entry["Name"] }}\nPassword: '+ '{{ form_entry["Pass"] }}'
-        console.log(linkInput);
-        linkInput.select();
-        linkInput.setSelectionRange(0, 99999); /* For mobile devices */
+        var linkInput = document.getElementById("link");
+        additionalString = ' \n\nPlease open the above mentioned link and login with the following credentials to access and fill in your form. \nName: {{ form_entry["Name"] }}\n Password: {{ form_entry["pass"] }}'
+        console.log(additionalString);
+
+        linkWithCustomString = linkInput.value + additionalString
+        // Create a temporary input element to copy the modified link
+        var tempInput = document.createElement("input");
+        tempInput.value = linkWithCustomString;
+        document.body.appendChild(tempInput);
+
+        tempInput.select();
+        tempInput.setSelectionRange(0, 999999);
 
         try {
             document.execCommand("copy");
@@ -26,3 +33,5 @@
 </script>
 
 {% endblock %}
+
+
