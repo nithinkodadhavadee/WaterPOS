@@ -48,5 +48,9 @@ def login_page():
 @auth.route('/logout')
 def logout():
     # Clear session data to logout the user
-    session.clear()
+    # session.clear()
+    session['logged_in'] = False
+    session['company'] = ''
+    session['type'] = ''
+    session['ID'] = ''
     return redirect(url_for('auth.login_page'))

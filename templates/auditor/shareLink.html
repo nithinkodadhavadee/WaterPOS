@@ -15,13 +15,15 @@
         console.log(additionalString);
 
         linkWithCustomString = linkInput.value + additionalString
-        // Create a temporary input element to copy the modified link
-        var tempInput = document.createElement("input");
-        tempInput.value = linkWithCustomString;
-        document.body.appendChild(tempInput);
+        linkInput.value = linkWithCustomString
 
-        tempInput.select();
-        tempInput.setSelectionRange(0, 999999);
+        // Create a temporary input element to copy the modified link
+        // var tempInput = document.createElement("input");
+        // tempInput.value = linkWithCustomString;
+        // document.body.appendChild(tempInput);
+
+        linkInput.select();
+        linkInput.setSelectionRange(0, 999999);
 
         try {
             document.execCommand("copy");

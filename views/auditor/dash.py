@@ -75,10 +75,16 @@ def dash_page():
             if blocks_response.status_code == 200:
                 blocks_html = generate_blocks_view(blocks_response.json(), company_id)
         
+            all_blocks = blocks_response.json()
+            blocks = []
+            for block in all_blocks:
+                if block['Company ID'] == company_id:
+                    blocks.append(block)
+
 
             for x in form_categories:
                 try:
-                    form_generated = generate_html_form(x, company_type=company_type, id=company_id, filtered_response=filtered_response, filtered_entries=filtered_entries)
+                    form_generated = generate_html_form(x, company_type=company_type, id=company_id, filtered_response=filtered_response, filtered_entries=filtered_entries, blocks=blocks)
                     # print(x)
                     form_html.append(form_generated)
                 except:

@@ -2,7 +2,7 @@ from .generateTableView import generate_table_view
 from flask import Blueprint, render_template, redirect, url_for, session
 import requests
 
-def generate_html_form(form_data, company_type=None, id=None, submit_link=None, filtered_response = [], filtered_entries = []):
+def generate_html_form(form_data, company_type=None, id=None, submit_link=None, filtered_response = [], filtered_entries = [], blocks=None):
     
     count = 0
     if company_type == None:
@@ -45,7 +45,18 @@ def generate_html_form(form_data, company_type=None, id=None, submit_link=None, 
                 elif field["Type"] == "list":
                     try:
                         ref_form = filtered_response
-                        html_code += generate_table_view(ref_form, field["Text"])
+                        if field["Description"] == "buildings":
+                            html_code += generate_table_view(ref_form, field["Text"], blocks=blocks)
+                        elif field["Description"] == "":
+                            html_code += generate_table_view(ref_form, field["Text"])
+                        else:
+                            values = field["Description"].split(',')
+                            dummy_dict = []
+                            for x in values:
+                                dummy_dict.append({"Name":x})
+                            
+                            html_code += generate_table_view(ref_form, field["Text"], blocks=dummy_dict)
+
                     except:
                         pass
                 elif field["Type"] == "longtext":
@@ -77,7 +88,18 @@ def generate_html_form(form_data, company_type=None, id=None, submit_link=None, 
                 elif field["Type"] == "list":
                     try:
                         ref_form = filtered_response
-                        html_code += generate_table_view(ref_form, field["Text"])
+                        if field["Description"] == "buildings":
+                            html_code += generate_table_view(ref_form, field["Text"], blocks = blocks)
+                        elif field["Description"] == "buildings":
+                            html_code += generate_table_view(ref_form, field["Text"])
+                        else:
+                            values = field["Description"].split(',')
+                            dummy_dict = []
+                            for x in values:
+                                dummy_dict.append({"Name":x})
+                            
+                            html_code += generate_table_view(ref_form, field["Text"], blocks=dummy_dict)
+
                     except:
                         pass
                 elif field["Type"] == "longtext":
@@ -87,7 +109,7 @@ def generate_html_form(form_data, company_type=None, id=None, submit_link=None, 
                 elif field["Type"] == "url":
                     html_code += f'<input type="url" name="{field["_RowNumber"]}" >'
                 elif field["Type"] == "bool":
-                    html_code += f'<input type="checkbox" disabled>'
+                    html_code += f'<input type="checkbox">'
                 elif field["Type"] == "select":
                     values = field["Description"].split(',')
                     select_html = f'<select name="{field["_RowNumber"]}">'
