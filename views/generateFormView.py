@@ -22,7 +22,7 @@ def generate_html_form(form_data, company_type=None, id=None, submit_link=None, 
             html_code += f'<h3>{field["Text"]}</h3>'
         else:
             count = count+1
-
+            html_code += '<div class="nice-form-group">'
             # Otherwise, create the input element based on the field type
             html_code += f'<label>{count}. {field["Text"]}:</label>'
             
@@ -66,7 +66,7 @@ def generate_html_form(form_data, company_type=None, id=None, submit_link=None, 
                 elif field["Type"] == "url":
                     html_code += f'<input type="url" name="{field["_RowNumber"]}" value="{filtered_entries[field["Text"]]}">'
                 elif field["Type"] == "bool":
-                    html_code += f'<input type="checkbox" {'checked' if filtered_entries[field["Text"]] == '1' else ''}>'
+                    html_code += f'<input type="checkbox" {'checked' if filtered_entries[field["Text"]] == '1' else ''}  class="switch">'
                 elif field["Type"] == "select":
                     values = field["Description"].split(',')
                     select_html = f'<select name="{field["_RowNumber"]}">'
@@ -109,7 +109,7 @@ def generate_html_form(form_data, company_type=None, id=None, submit_link=None, 
                 elif field["Type"] == "url":
                     html_code += f'<input type="url" name="{field["_RowNumber"]}" >'
                 elif field["Type"] == "bool":
-                    html_code += f'<input type="checkbox">'
+                    html_code += f'<input type="checkbox" class="switch">'
                 elif field["Type"] == "select":
                     values = field["Description"].split(',')
                     select_html = f'<select name="{field["_RowNumber"]}">'
@@ -117,6 +117,6 @@ def generate_html_form(form_data, company_type=None, id=None, submit_link=None, 
                         select_html += f'<option value={value}>{value}</option>'
                     html_code += f'{select_html}</select>'
 
-            html_code += '<br><br>'
+            html_code += '</div><br><br>'
     html_code += '<button type="submit">Submit</button></form>'
     return html_code

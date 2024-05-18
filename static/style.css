@@ -16,6 +16,7 @@ body {
 
 table {
     width: 80%;
+    max-width: 80%;
     margin: auto;
     border-collapse: collapse;
     border: 2px solid #333;
@@ -38,9 +39,9 @@ tr:nth-child(odd) {
 }
 
 tr {
-    margin-bottom: 10px; /* Add margin between table rows */
-    border: 1px solid #000000; /* Add solid border around table cells */
-    padding: 8px; /* Add padding inside table cells */
+    margin-bottom: 10px; 
+    border: 1px solid #000000; 
+    padding: 8px; 
 }
 
 tr:hover {
@@ -50,6 +51,7 @@ tr:hover {
 div {
     margin: auto;
 }
+
 
 input, textarea, select {
     width: 60%;
@@ -75,4 +77,5 @@ label {
     max-width: 80%;
     margin: auto;
     text-align: left;
-}
+} 
+

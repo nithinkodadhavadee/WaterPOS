@@ -1,0 +1,317 @@
+<html>
+
+<head>
+    <title>Water Audit POS</title>
+    <!-- Add your header CSS, meta tags, etc. here -->
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/nice-forms.css">
+    <link rel="stylesheet" href="/static/nice-forms-reset.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My HTML Page with Inter Font</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+</head>
+
+<body data-new-gr-c-s-check-loaded="14.1173.0" data-gr-ext-installed="">
+    <header>
+        <!-- Your header content goes here -->
+        <h1>Water Audit</h1>
+        <nav>
+            <!-- Your navigation links go here -->
+            <ul>
+                <!-- <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li> -->
+                <!-- Add more navigation links as needed -->
+
+                <li><a href="/logout">Logout</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Content block that will be overridden by child templates -->
+
+    <div class="container-fluid">
+        <div class="row">
+            Company: <strong> jerry </strong>
+            <br>type: Automobile
+            <br><br>
+
+
+
+            <div class="tab-pane fade" id="buildingsView" role="tabpanel">
+                <!-- Buildings content goes here -->
+                <!-- <p>This is the buildings content. You can add your buildings-related information here.</p> -->
+                <table border="1">
+                    <tbody>
+                        <tr>
+                            <th>Name</th>
+                            <th>Length</th>
+                            <th>Width</th>
+                            <th>Roof Area</th>
+                            <th>Surface Type</th>
+                        </tr>
+                        <tr>
+                            <td>One</td>
+                            <td>400</td>
+                            <td>1200</td>
+                            <td>480000</td>
+                            <td>concrete</td>
+                        </tr>
+                        <tr>
+                            <td>Two</td>
+                            <td>500</td>
+                            <td>1100</td>
+                            <td>550000</td>
+                            <td>concrete</td>
+                        </tr>
+                        <tr>
+                            <td>Three</td>
+                            <td>600</td>
+                            <td>1000</td>
+                            <td>600000</td>
+                            <td>concrete</td>
+                        </tr>
+                        <tr>
+                            <td>Four</td>
+                            <td>700</td>
+                            <td>900</td>
+                            <td>630000</td>
+                            <td>concrete</td>
+                        </tr>
+                        <tr>
+                            <td>New Building</td>
+                            <td>1500</td>
+                            <td>100</td>
+                            <td>150000</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <div class="tab-content">
+                    <a href=""></a><button>Save</button>
+                    <div class="tab" style="overflow: hidden; border: 1px solid #ccc; background-color: #f1f1f1;">
+                        <!-- <button class="tablinks" style="background-color: inherit; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; transition: 0.3s;" onclick="openTab(event, 'company-details')">Company Details</button> -->
+                        <button class="tablinks active"
+                            style="background-color: inherit; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; transition: 0.3s;"
+                            onclick="openTab(event, 'freshwater')">Freshwater</button>
+                        <button class="tablinks"
+                            style="background-color: inherit; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; transition: 0.3s;"
+                            onclick="openTab(event, 'stp-wastewater')">STP Wastewater</button>
+                        <button class="tablinks"
+                            style="background-color: inherit; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; transition: 0.3s;"
+                            onclick="openTab(event, 'etp')">ETP</button>
+                        <button class="tablinks"
+                            style="background-color: inherit; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; transition: 0.3s;"
+                            onclick="openTab(event, 'water-leakage')">Water Leakage</button>
+
+                    </div>
+
+                    <!-- <div id="company-details" class="tabcontent" style="display: none; padding: 20px; border: 1px solid #ccc;">
+                    
+                  <h1>Company</h1>
+                  </div> -->
+
+                    <div id="freshwater" class="tabcontent"
+                        style="display: block; padding: 20px; border: 1px solid #ccc;">
+                        <!-- Freshwater Form Goes Here -->
+                        <form>
+                            <h3>FRESH WATER</h3>
+                            <div class="nice-form-group"><label>1. Total base area of the plot/ dimension of the campus
+                                    (in Sq. M. or Sq. Ft. or Acres):</label>
+                                <table id="table1">
+                                    <tbody>
+                                        <tr>
+                                            <th>Total base area of the plot/ dimension of the campus (in Sq. M. or Sq.
+                                                Ft. or Acres) - Names</th>
+                                            <th>Total base area of the plot/ dimension of the campus (in Sq. M. or Sq.
+                                                Ft. or Acres) - Area</th>
+                                            <th>Total base area of the plot/ dimension of the campus (in Sq. M. or Sq.
+                                                Ft. or Acres) - Units</th>
+                                        </tr>
+                                        <tr>
+                                            <td contenteditable="">Total Area of the plot</td>
+                                            <td contenteditable="">1000</td>
+                                            <td contenteditable="">Sq M</td>
+                                        </tr>
+                                        <tr>
+                                            <td contenteditable="">Paved Area (includes internal roadsand other hard
+                                                surfaces)</td>
+                                            <td contenteditable="">400</td>
+                                            <td contenteditable="">Sq M</td>
+                                        </tr>
+                                        \<tr id="empty-row-table1" style="display:none;">
+                                            <td>
+                                                <div class="nice-form-group"><select>
+                                                        <option value="Total Area of the plot">Total Area of the plot
+                                                        </option>
+                                                        <option
+                                                            value=" Paved Area (includes internal roadsand other hard surfaces)">
+                                                            Paved Area (includes internal roadsand other hard surfaces)
+                                                        </option>
+                                                        <option value=" Garden/Lawn Area (maintained)"> Garden/Lawn Area
+                                                            (maintained)</option>
+                                                        <option
+                                                            value=" Green Belt area (excluding garden or lawn area)">
+                                                            Green Belt area (excluding garden or lawn area)</option>
+                                                        <option value=" Other Area"> Other Area</option>
+                                                    </select></div>
+                                            </td>
+                                            <td contenteditable=""></td>
+                                            <td contenteditable=""></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button type="button" onclick="addEmptyRow(&quot;table1&quot;)">Add Row</button>
+
+                                <script>
+                                    function addEmptyRow(tableId) {
+                                        var table = document.querySelector('table#' + tableId);
+                                        var newRow = document.getElementById('empty-row-' + tableId).cloneNode(true);
+                                        newRow.removeAttribute('id');
+                                        newRow.style.display = '';
+                                        table.appendChild(newRow);
+                                    }
+                                </script>
+                            </div><br><br>
+                            <div class="nice-form-group"><label>2. Total number of Employees working (Including all
+                                    capacity/ level/grade + Outsourced Employees):</label><input type="number" name="6"
+                                    value="1"></div><br><br>
+                            <div class="nice-form-group"><label>3. Total No. of Departments/ Divisions/ Sections within
+                                    the campus:</label><input type="number" name="7" value="1"></div><br><br>
+                            <div class="nice-form-group"><label>4. Number of Employees in each:</label>
+                                <table id="table2">
+                                    <tbody>
+                                        <tr>
+                                            <th>Number of Employees in each Department/Division/Section - Name of
+                                                Department/Division/Section</th>
+                                            <th>Number of Employees in each Department/Division/Section - Number of
+                                                employees</th>
+                                        </tr>
+                                        <tr>
+                                            <td contenteditable="">HR</td>
+                                            <td contenteditable="">5</td>
+                                        </tr>
+                                        <tr id="empty-row-table2" style="display:none;">
+                                            <td contenteditable=""></td>
+                                            <td contenteditable=""></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button type="button" onclick="addEmptyRow(&quot;table2&quot;)">Add Row</button>
+
+                                <script>
+                                    function addEmptyRow(tableId) {
+                                        var table = document.querySelector('table#' + tableId);
+                                        var newRow = document.getElementById('empty-row-' + tableId).cloneNode(true);
+                                        newRow.removeAttribute('id');
+                                        newRow.style.display = '';
+                                        table.appendChild(newRow);
+                                    }
+                                </script>
+                            </div><br><br>
+                            <div class="nice-form-group"><label>5. Quantity of Raw water drawn (Bulk water supplied)
+                                    from BWSSB main (in KLD):</label>
+                                <table id="table3">
+                                    <tbody>
+                                        <tr>
+                                            <th>Quantity of Raw water drawn (Bulk water supplied) from BWSSB main (in
+                                                KLD) - BWSSB Line</th>
+                                            <th>Quantity of Raw water drawn (Bulk water supplied) from BWSSB main (in
+                                                KLD) - Quantity</th>
+                                        </tr>
+                                        <tr>
+                                            <td contenteditable="">Line 1</td>
+                                            <td contenteditable="">1000</td>
+                                        </tr>
+                                        <tr>
+                                            <td contenteditable="">Line 2</td>
+                                            <td contenteditable="">1100</td>
+                                        </tr>
+                                        <tr>
+                                            <td contenteditable="">Line 3</td>
+                                            <td contenteditable="">1200</td>
+                                        </tr>
+                                        <tr id="empty-row-table3" style="display:none;">
+                                            <td contenteditable=""></td>
+                                            <td contenteditable=""></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button type="button" onclick="addEmptyRow(&quot;table3&quot;)">Add Row</button>
+
+                                <script>
+                                    function addEmptyRow(tableId) {
+                                        var table = document.querySelector('table#' + tableId);
+                                        var newRow = document.getElementById('empty-row-' + tableId).cloneNode(true);
+                                        newRow.removeAttribute('id');
+                                        newRow.style.display = '';
+                                        table.appendChild(newRow);
+                                    }
+                                </script>
+                            </div><br><br>
+                            <div class="nice-form-group"><label>6. Quantity of Raw water drawn from the Bore well
+                                    (Groundwater) (in KLD):</label>
+                                <table id="table4">
+                                    <tbody>
+                                        <tr>
+                                            <th>Quantity of Raw water drawn from the Bore well (Groundwater) (in KLD) -
+                                                Borewell No. / Name</th>
+                                            <th>Quantity of Raw water drawn from the Bore well (Groundwater) (in KLD) -
+                                                Quantity</th>
+                                        </tr>
+                                        <tr>
+                                            <td contenteditable="">one</td>
+                                            <td contenteditable="">100</td>
+                                        </tr>
+                                        <tr>
+                                            <td contenteditable="">two</td>
+                                            <td contenteditable="">200</td>
+                                        </tr>
+                                        <tr>
+                                            <td contenteditable="">three</td>
+                                            <td contenteditable="">300</td>
+                                        </tr>
+                                        <tr id="empty-row-table4" style="display:none;">
+                                            <td contenteditable=""></td>
+                                            <td contenteditable=""></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button type="button" onclick="addEmptyRow(&quot;table4&quot;)">Add Row</button>
+
+                                <script>
+                                    function addEmptyRow(tableId) {
+                                        var table = document.querySelector('table#' + tableId);
+                                        var newRow = document.getElementById('empty-row-' + tableId).cloneNode(true);
+                                        newRow.removeAttribute('id');
+                                        newRow.style.display = '';
+                                        table.appendChild(newRow);
+                                    }
+                                </script>
+                            </div><br><br>
+                            <br><br><button type="submit">Submit</button>
+                        </form>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+
+    <footer>
+        <!-- Your footer content goes here -->
+        <p>© 2024 Your Website. All rights reserved.</p>
+    </footer>
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
+
+</html>

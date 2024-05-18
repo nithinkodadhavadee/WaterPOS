@@ -41,7 +41,7 @@ def generate_table_view(table_data, prefix=None, dropdown=None, blocks=None):
     html += f"<tr id='empty-row-{table_id}' style='display:none;'>\n"
     # Add dropdown to the first column if options exist
     if dropdown_options:
-        html += f"<td><select>{dropdown_options}</select></td>\n"
+        html += f'<td><div class="nice-form-group"><select>{dropdown_options}</select></div></td>\n'
     else:
         html += "<td contenteditable></td>\n"
     # Add editable cells to the remaining columns
