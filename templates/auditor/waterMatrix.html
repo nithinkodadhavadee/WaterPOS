@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href="/auditor/conservation?company={{ company_id }}"><button>Next: Water Conservation Methods</button></a>
+<a href="/auditor/conservation?company={{ company_id }}&type={{ company_type }}&name={{ company_name }}"><button>Next: Water Conservation Methods</button></a>
 <h1>Water Balance Matrix</h1>
 Company : <strong> {{ company_name }} </strong> <br><br>
 <table>

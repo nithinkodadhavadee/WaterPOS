@@ -90,7 +90,7 @@ def dash_page():
             except:
                 form_html.append("Cannot generate Form") 
 
-        return render_template('categoryformPage.html', company=company, form_html = form_html, company_type=company_type, blocks_html=blocks_html)
+        return render_template('categoryFormPage.html', company=company, form_html = form_html, company_type=company_type, blocks_html=blocks_html)
         
         # form_view = "Cannot access the forms"
         # blocks_html = "Cannot access buildings"

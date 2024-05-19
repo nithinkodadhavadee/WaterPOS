@@ -91,7 +91,7 @@ def dash_page():
                     form_html.append("Cannot generate Form") 
 
             misc_button = '<button class="tablinks" style="background-color: inherit; float: left; border: none; outline: none; cursor: pointer; padding: 14px 16px; transition: 0.3s;" onclick="openTab(event, \'misce\')">Miscellaneous Questions</button>'
-            return render_template('categoryformPage.html', company=company, water_matrix=water_matrix_html, form_html = form_html, company_type=company_type, blocks_html=blocks_html, misc_button=misc_button)
+            return render_template('categoryFormPage.html', company=company, water_matrix=water_matrix_html, form_html = form_html, company_type=company_type, blocks_html=blocks_html, misc_button=misc_button)
             
         else:
             # Get company name and type from session data

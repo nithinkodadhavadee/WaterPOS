@@ -68,13 +68,13 @@ def report_view():
         borewellString = ""
         tankerString = ""
         if filtered_form_response["Quantity of Raw water supplied from the Tankers/ Vendor for domestic/ non domestic purpose (in KLD)"]:
-            tankerString = f"procures {filtered_form_response["Quantity of Raw water supplied from the Tankers/ Vendor for domestic/ non domestic purpose (in KLD)"]}KL of water per day from a tanker, storing the raw water in designated sumps before consumption for various purposes."
+            tankerString = f"procures {filtered_form_response['Quantity of Raw water supplied from the Tankers/ Vendor for domestic/ non domestic purpose (in KLD)']}KL of water per day from a tanker, storing the raw water in designated sumps before consumption for various purposes."
         
         if total_multi_form_response.get("Quantity of Raw water drawn from the Bore well (Groundwater) (in KLD) - Quantity",0):
             if tankerString == "":
-                borewellString = f"is authorized to withdraw {total_multi_form_response["Quantity of Raw water drawn from the Bore well (Groundwater) (in KLD) - Quantity" ]}KL of water from borewells." # {{X}}KL of water from {{Y}} borewells. "
+                borewellString = f"is authorized to withdraw {total_multi_form_response['Quantity of Raw water drawn from the Bore well (Groundwater) (in KLD) - Quantity' ]}KL of water from borewells." # {{X}}KL of water from {{Y}} borewells. "
             else:
-                borewellString = f"Currently, the plant is authorized to withdraw {total_multi_form_response["Quantity of Raw water drawn from the Bore well (Groundwater) (in KLD) - Quantity" ]}KL of water from borewells." # {{X}}KL of water from {{Y}} borewells. "
+                borewellString = f"Currently, the plant is authorized to withdraw {total_multi_form_response['Quantity of Raw water drawn from the Bore well (Groundwater) (in KLD) - Quantity' ]}KL of water from borewells." # {{X}}KL of water from {{Y}} borewells. "
             
         executiveSummary = f"""
         <h1>Executive Summary</h1>

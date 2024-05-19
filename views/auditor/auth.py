@@ -13,7 +13,7 @@ def login_page():
         
         # Make API call to fetch auditor name and password
         try:
-            api_url = "https://www.appsheet.com/api/v2/apps/80ca4d2d-67ba-4f5e-9dc2-6c954355c70c/tables/Projects/Action?applicationAccessKey=V2-qCjEs-Vnmn2-4X5Zm-bDW8b-LUC3U-k3i1H-9DovC-fkSY6"
+            api_url = "https://www.appsheet.com/api/v2/apps/80ca4d2d-67ba-4f5e-9dc2-6c954355c70c/tables/Auditors/Action?applicationAccessKey=V2-qCjEs-Vnmn2-4X5Zm-bDW8b-LUC3U-k3i1H-9DovC-fkSY6"
             request_body_data = {
                 "Action": "Find",
                 "Properties": {
@@ -21,7 +21,7 @@ def login_page():
                 },
                 "Rows":[
                     {
-                        "Name": auditor
+                        "Phone": auditor
                     }
                 ]
             }
@@ -30,7 +30,7 @@ def login_page():
             [data] = response.json()
             
             # Check if the auditor exists and the password matches
-            if response.status_code == 200 and data.get('pass') == password:
+            if response.status_code == 200 and data.get('Password') == password:
                 # Set session variable to indicate user is authenticated
                 session['auditor_logged_in'] = True
                 return redirect(url_for('auditor_dash.dash_page'))

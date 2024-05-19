@@ -66,7 +66,7 @@ def generate_html_form(form_data, company_type=None, id=None, submit_link=None, 
                 elif field["Type"] == "url":
                     html_code += f'<input type="url" name="{field["_RowNumber"]}" value="{filtered_entries[field["Text"]]}">'
                 elif field["Type"] == "bool":
-                    html_code += f'<input type="checkbox" {'checked' if filtered_entries[field["Text"]] == '1' else ''}  class="switch">'
+                    html_code += f'<input type="checkbox" {"checked" if filtered_entries[field["Text"]] == "1" else ""}  class="switch">'
                 elif field["Type"] == "select":
                     values = field["Description"].split(',')
                     select_html = f'<select name="{field["_RowNumber"]}">'

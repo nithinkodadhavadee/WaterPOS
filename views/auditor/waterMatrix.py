@@ -197,4 +197,4 @@ def generateViews():
 
     processed_table_data.append(["", "The difference between Source(A) and Consumption (B)", totals[0]-totals[1], ""])
     # Pass the processed_table_data to the HTML template for rendering
-    return render_template('auditor/watermatrix.html', table_data=processed_table_data, company_name = company_name, company_id = company)
+    return render_template('auditor/waterMatrix.html', table_data=processed_table_data, company_name = company_name, company_id = company, company_type=company_type)
